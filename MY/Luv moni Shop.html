@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="google-site-verification" content="YkMFMA8lSrPPsrjLLirKtlUP0jB-0EF2geUll_MR1AQ" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUV MONI's Shop - Ghana Online Marketplace</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(120deg, #f8fafc 0%, #e0e7ff 100%);
+            color: #222;
+        }
+
+        header {
+            background: linear-gradient(90deg, #0f2027 0%, #2c5364 100%);
+            color: #fff;
+            padding: 32px 0 24px 0;
+            box-shadow: 0 4px 24px rgba(44,83,100,0.15);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-container h1 {
+            font-size: 40px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 8px rgba(44,83,100,0.12);
+        }
+
+        nav {
+            display: flex;
+            gap: 24px;
+        }
+
+        nav button {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border: none;
+            padding: 14px 32px;
+            cursor: pointer;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(102,126,234,0.15);
+            transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav button::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.15);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        nav button:hover {
+            background: linear-gradient(90deg, #764ba2 0%, #667eea 100%);
+            transform: scale(1.07) rotate(-2deg);
+            box-shadow: 0 8px 24px rgba(102,126,234,0.25);
+        }
+
+        nav button:hover::after {
+            opacity: 1;
+        }
+
+        nav button:active {
+            transform: scale(0.98);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 24px;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.7s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Upload Section */
+        .upload-form {
+            background: linear-gradient(120deg, #fff 60%, #e0e7ff 100%);
+            padding: 36px;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(44,83,100,0.10);
+            margin-bottom: 40px;
+            animation: fadeIn 0.7s;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: #2c5364;
+            font-size: 17px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #cfd8dc;
+            border-radius: 8px;
+            font-size: 17px;
+            font-family: inherit;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background: #f8fafc;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 2px 8px rgba(102,126,234,0.10);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .image-preview {
+            width: 100%;
+            max-height: 320px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-top: 12px;
+            box-shadow: 0 2px 8px rgba(44,83,100,0.10);
+            animation: fadeIn 0.7s;
+        }
+
+        button.submit-btn {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding: 16px 36px;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+            width: 100%;
+            box-shadow: 0 2px 8px rgba(102,126,234,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        button.submit-btn::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.15);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        button.submit-btn:hover {
+            background: linear-gradient(90deg, #764ba2 0%, #667eea 100%);
+            transform: scale(1.07) rotate(-2deg);
+            box-shadow: 0 8px 24px rgba(102,126,234,0.25);
+        }
+
+        button.submit-btn:hover::after {
+            opacity: 1;
+        }
+
+        button.submit-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 32px;
+        }
+
+        .product-card {
+            background: linear-gradient(120deg, #fff 60%, #e0e7ff 100%);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(44,83,100,0.10);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeIn 0.7s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 16px 32px rgba(44,83,100,0.18);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            background-color: #e0e7ff;
+            border-bottom: 2px solid #cfd8dc;
+        }
+
+        .product-info {
+            padding: 28px;
+        }
+
+        .product-title {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: #2c5364;
+        }
+
+        .product-description {
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 16px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-price {
+            font-size: 24px;
+            font-weight: 900;
+            color: #667eea;
+            margin-bottom: 18px;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 14px;
+        }
+
+        .btn-delete, .btn-contact {
+            flex: 1;
+            border: none;
+            padding: 14px 0;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 17px;
+            transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+            box-shadow: 0 2px 8px rgba(44,83,100,0.10);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-delete {
+            background: linear-gradient(90deg, #ff6b6b 0%, #ff5252 100%);
+            color: #fff;
+        }
+        .btn-delete:hover {
+            background: linear-gradient(90deg, #ff5252 0%, #ff6b6b 100%);
+            transform: scale(1.07) rotate(-2deg);
+            box-shadow: 0 8px 24px rgba(255,107,107,0.25);
+        }
+        .btn-delete:active {
+            transform: scale(0.98);
+        }
+
+        .btn-contact {
+            background: linear-gradient(90deg, #51cf66 0%, #40c057 100%);
+            color: #fff;
+        }
+        .btn-contact:hover {
+            background: linear-gradient(90deg, #40c057 0%, #51cf66 100%);
+            transform: scale(1.07) rotate(-2deg);
+            box-shadow: 0 8px 24px rgba(81,207,102,0.25);
+        }
+        .btn-contact:active {
+            transform: scale(0.98);
+        }
+
+        .empty-message {
+            text-align: center;
+            padding: 60px 24px;
+            color: #999;
+            font-size: 20px;
+            animation: fadeIn 0.7s;
+        }
+
+        .about-section {
+            background: linear-gradient(120deg, #fff 60%, #e0e7ff 100%);
+            padding: 36px;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(44,83,100,0.10);
+            animation: fadeIn 0.7s;
+        }
+
+        .about-section h2 {
+            margin-bottom: 18px;
+            color: #667eea;
+            font-size: 28px;
+            font-weight: 900;
+        }
+
+        .about-section p {
+            line-height: 1.7;
+            margin-bottom: 18px;
+            font-size: 17px;
+        }
+
+        /* Car drifting animation */
+        .car-drift-container {
+            position: relative;
+            width: 100%;
+            height: 80px;
+            margin-top: 10px;
+            margin-bottom: 30px;
+        }
+        .car-drift {
+            position: absolute;
+            left: 0;
+            top: 20px;
+            width: 100px;
+            height: 50px;
+            z-index: 2;
+            animation: carDrift 2.5s ease-in-out infinite;
+        }
+        .drift-smoke {
+            position: absolute;
+            left: 0;
+            top: 45px;
+            width: 60px;
+            height: 20px;
+            z-index: 1;
+            pointer-events: none;
+            animation: smokeDrift 2.5s ease-in-out infinite;
+        }
+        @keyframes carDrift {
+            0% { left: 0; transform: rotate(-8deg) scale(1); }
+            20% { left: 60px; transform: rotate(0deg) scale(1.05); }
+            40% { left: 120px; transform: rotate(8deg) scale(1.1); }
+            60% { left: 180px; transform: rotate(0deg) scale(1.05); }
+            80% { left: 240px; transform: rotate(-8deg) scale(1); }
+            100% { left: 0; transform: rotate(-8deg) scale(1); }
+        }
+        @keyframes smokeDrift {
+            0% { opacity: 0.7; left: 0; }
+            20% { opacity: 0.5; left: 60px; }
+            40% { opacity: 0.3; left: 120px; }
+            60% { opacity: 0.5; left: 180px; }
+            80% { opacity: 0.7; left: 240px; }
+            100% { opacity: 0.7; left: 0; }
+        }
+        }
+        
+    @media (max-width: 900px) {
+            .header-container {
+                flex-direction: column;
+                gap: 18px;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+            nav {
+                width: 100%;
+                flex-direction: column;
+            }
+            nav button {
+                width: 100%;
+            }
+        }
+        @media (max-width: 600px) {
+            .header-container h1 {
+                font-size: 28px;
+            }
+            .container {
+                padding: 0 8px;
+            }
+            .upload-form, .about-section {
+                padding: 16px;
+            }
+            .product-info {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px; width: 100%;">
+                <!-- Animated Phone Banner -->
+                <div style="width:100%; display:flex; justify-content:center; margin-bottom: 8px;">
+                    <svg id="phone-banner" width="420" height="70" viewBox="0 0 420 70" style="display:block;">
+                        <!-- Store building -->
+                        <g id="store" style="animation: storeBounce 2.5s infinite alternate;">
+                            <rect x="10" y="30" width="60" height="28" rx="7" fill="#667eea" stroke="#2c5364" stroke-width="2"/>
+                            <rect x="22" y="48" width="36" height="8" rx="2" fill="#fff" stroke="#cfd8dc" stroke-width="1"/>
+                            <rect x="34" y="52" width="12" height="4" rx="1" fill="#764ba2"/>
+                            <polygon points="10,30 40,14 70,30" fill="#ffb347" stroke="#2c5364" stroke-width="2"/>
+                            <rect x="44" y="36" width="14" height="6" rx="2" fill="#51cf66" stroke="#2c5364" stroke-width="1"/>
+                            <text x="51" y="41" font-size="4" font-family="Montserrat, Arial" fill="#fff" text-anchor="middle">OPEN</text>
+                        </g>
+                        <!-- Animated phone group with logos -->
+                        <g>
+                            <!-- iPhone style -->
+                            <g id="iphone" style="animation: phoneSlide 3s infinite alternate;">
+                                <rect x="90" y="10" width="32" height="48" rx="8" fill="#fff" stroke="#222" stroke-width="2.5"/>
+                                <rect x="98" y="18" width="16" height="32" rx="3" fill="#e0e7ff"/>
+                                <circle cx="106" cy="50" r="2" fill="#222"/>
+                                <!-- Apple logo -->
+                                <g transform="translate(106,28) scale(0.7)">
+                                    <path d="M2.5 2.5 Q2 0 4.5 0 Q7 0 6.5 2.5 Q6 5 4.5 5 Q3 5 2.5 2.5Z" fill="#222"/>
+                                    <ellipse cx="4.5" cy="-0.7" rx="0.7" ry="0.4" fill="#222"/>
+                                </g>
+                            </g>
+                            <!-- Android style -->
+                            <g id="android" style="animation: phoneSlide2 3s infinite alternate;">
+                                <rect x="150" y="14" width="32" height="44" rx="7" fill="#fff" stroke="#51cf66" stroke-width="2.5"/>
+                                <rect x="158" y="22" width="16" height="28" rx="3" fill="#d3f9d8"/>
+                                <circle cx="166" cy="48" r="2" fill="#51cf66"/>
+                                <!-- Android logo -->
+                                <g transform="translate(166,30) scale(0.7)">
+                                    <rect x="-2" y="0" width="4" height="3" rx="1" fill="#51cf66"/>
+                                    <rect x="-2.5" y="-1.5" width="5" height="1.5" rx="0.7" fill="#51cf66"/>
+                                    <circle cx="-1.2" cy="1.5" r="0.3" fill="#fff"/>
+                                    <circle cx="1.2" cy="1.5" r="0.3" fill="#fff"/>
+                                </g>
+                            </g>
+                            <!-- Feature phone style -->
+                            <g id="featurephone" style="animation: phoneSlide3 3s infinite alternate;">
+                                <rect x="210" y="18" width="28" height="40" rx="6" fill="#fff" stroke="#ffb347" stroke-width="2.5"/>
+                                <rect x="216" y="24" width="16" height="18" rx="2" fill="#fff3cd"/>
+                                <rect x="216" y="44" width="16" height="8" rx="2" fill="#ffb347"/>
+                                <circle cx="224" cy="54" r="1.5" fill="#ffb347"/>
+                                <!-- Keypad dots -->
+                                <circle cx="220" cy="48" r="0.7" fill="#fff"/>
+                                <circle cx="224" cy="48" r="0.7" fill="#fff"/>
+                                <circle cx="228" cy="48" r="0.7" fill="#fff"/>
+                            </g>
+                            <!-- Samsung style -->
+                            <g id="samsung" style="animation: phoneSlide4 3s infinite alternate;">
+                                <rect x="260" y="12" width="32" height="48" rx="8" fill="#fff" stroke="#667eea" stroke-width="2.5"/>
+                                <rect x="268" y="20" width="16" height="32" rx="3" fill="#e0e7ff"/>
+                                <circle cx="276" cy="52" r="2" fill="#667eea"/>
+                                <!-- Samsung logo (stylized S) -->
+                                <g transform="translate(276,28) scale(0.7)">
+                                    <path d="M-2,0 Q0,-2 2,0 Q0,2 -2,0" fill="none" stroke="#667eea" stroke-width="0.7"/>
+                                </g>
+                            </g>
+                            <!-- Google Pixel style -->
+                            <g id="pixel" style="animation: phoneSlide5 3s infinite alternate;">
+                                <rect x="320" y="16" width="32" height="44" rx="7" fill="#fff" stroke="#ff6b6b" stroke-width="2.5"/>
+                                <rect x="328" y="24" width="16" height="28" rx="3" fill="#ffe3e3"/>
+                                <circle cx="336" cy="50" r="2" fill="#ff6b6b"/>
+                                <!-- Google G logo -->
+                                <g transform="translate(336,30) scale(0.7)">
+                                    <path d="M0,0 A2,2 0 1,1 2,2" fill="none" stroke="#ff6b6b" stroke-width="0.7"/>
+                                </g>
+                            </g>
+                        </g>
+                        <!-- Animated sparkles -->
+                        <g>
+                            <circle cx="60" cy="12" r="2" fill="#ffd700" opacity="0.7">
+                                <animate attributeName="opacity" values="0.7;0.1;0.7" dur="2s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="120" cy="8" r="1.5" fill="#51cf66" opacity="0.7">
+                                <animate attributeName="opacity" values="0.7;0.1;0.7" dur="2.2s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="180" cy="14" r="2" fill="#764ba2" opacity="0.7">
+                                <animate attributeName="opacity" values="0.7;0.1;0.7" dur="2.4s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="240" cy="10" r="1.5" fill="#ffb347" opacity="0.7">
+                                <animate attributeName="opacity" values="0.7;0.1;0.7" dur="2.1s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="300" cy="12" r="2" fill="#ff6b6b" opacity="0.7">
+                                <animate attributeName="opacity" values="0.7;0.1;0.7" dur="2.3s" repeatCount="indefinite"/>
+                            </circle>
+                        </g>
+                        <style>
+                            @keyframes storeBounce {
+                                0% { transform: translateY(0px) scale(1); }
+                                50% { transform: translateY(-6px) scale(1.03); }
+                                100% { transform: translateY(0px) scale(1); }
+                            }
+                            @keyframes phoneSlide {
+                                0% { transform: translateY(0px) scale(1); }
+                                50% { transform: translateY(-8px) scale(1.05); }
+                                100% { transform: translateY(0px) scale(1); }
+                            }
+                            @keyframes phoneSlide2 {
+                                0% { transform: translateY(0px) scale(1); }
+                                50% { transform: translateY(-12px) scale(1.08); }
+                                100% { transform: translateY(0px) scale(1); }
+                            }
+                            @keyframes phoneSlide3 {
+                                0% { transform: translateY(0px) scale(1); }
+                                50% { transform: translateY(-10px) scale(1.06); }
+                                100% { transform: translateY(0px) scale(1); }
+                            }
+                            @keyframes phoneSlide4 {
+                                0% { transform: translateY(0px) scale(1); }
+                                50% { transform: translateY(-14px) scale(1.09); }
+                                100% { transform: translateY(0px) scale(1); }
+                            }
+                            @keyframes phoneSlide5 {
+                                0% { transform: translateY(0px) scale(1); }
+                                50% { transform: translateY(-9px) scale(1.07); }
+                                100% { transform: translateY(0px) scale(1); }
+                            }
+                        </style>
+                    </svg>
+                </div>
+                <div style="display: flex; align-items: center; gap: 18px; width: 100%;">
+                    <h1 style="font-size: 40px; font-weight: 900; letter-spacing: 2px; text-shadow: 0 2px 8px rgba(44,83,100,0.12);">LUV MONI's Shop</h1>
+                    <button id="themeToggle" title="Toggle light/dark mode" style="margin-left: 18px; background: none; border: none; cursor: pointer; outline: none; font-size: 32px; transition: transform 0.2s;">
+                        <span id="lampIcon" style="display:inline-block;">💡</span>
+                    </button>
+                </div>
+            </div>
+            <nav>
+                <button onclick="showSection('shop')">🛍️ Shop</button>
+                <button onclick="showSection('upload')">➕ Upload Item</button>
+                <button onclick="showSection('about')">ℹ️ About</button>
+                <datalist id="productCategories">
+                <option value="Electronics">
+                <option value="Iphones">
+                <option value="Phone Accessories">Phone Accessories</option>
+                <option value="Laptops & Computers">laptops & Computers</option>
+                <option value="PlayStation & Xbox">PlayStation & Xbox</option>
+                <option value="Toys & Games">Toys & Games</option>
+                <option value="Automotive">Automotive</option>
+                <option value="Services">Services</option>
+            </datalist>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Upload Section -->
+        <div id="upload" class="section active">
+            <div class="upload-form">
+                <h2>📤 Upload New Item</h2>
+                <br>
+                <form id="uploadForm" onsubmit="uploadProduct(event)">
+                    <div class="form-group">
+                        <label for="productImage">Product Image *</label>
+                        <input type="file" id="productImage" accept="image/*" required multiple>
+                        <div id="preview" class="image-preview" style="display:none; flex-wrap: wrap; gap: 8px;"></div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productName">Product Name *</label>
+                            <input type="text" id="productName" placeholder="e.g., Gaming Laptop" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="productPrice">Price (GHS) *</label>
+                            <input type="number" id="productPrice" placeholder="e.g., 2500.00" step="0.01" min="0" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="productDescription">Description *</label>
+                        <textarea id="productDescription" placeholder="Describe your product in detail..." required></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productCategory">Category *</label>
+                            <input type="text" id="productCategory" placeholder="e.g., Electronics, Clothing, etc." required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="productLocation">Location (Ghana) *</label>
+                            <input type="text" id="productLocation" placeholder="e.g., Accra, Kumasi, etc." required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">✅ Upload Product</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Shop Section -->
+        <div id="shop" class="section">
+            <h2 style="margin-bottom: 20px; color: #333;">All Products</h2>
+            <div style="margin-bottom: 24px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center;">
+                <select id="categoryFilter" style="padding: 12px; border-radius: 8px; border: 2px solid #cfd8dc; font-size: 16px;">
+                    <option value="">All Categories</option>
+                    <option value="Electronics">🔌 Electronics</option>
+                    <option value="Iphones">📱 Iphones</option>
+                    <option value="Phone Accessories">🎧 Phone Accessories</option>
+                    <option value="Laptops & Computers">💻 Laptops & Computers</option>
+                    <option value="PlayStation & Xbox">🎮 PlayStation & Xbox</option>
+                    <option value="Toys & Games">🧸 Toys & Games</option>
+                    <option value="Automotive">🚗 Automotive</option>
+                    <option value="Services">🛠️ Services</option>
+                </select>
+                <input id="searchBar" type="text" placeholder="Search products..." style="padding: 12px; border-radius: 8px; border: 2px solid #cfd8dc; font-size: 16px; flex: 1; min-width: 180px;">
+            </div>
+            <div style="margin-bottom: 16px; color: #667eea; font-weight: 700;">
+                Available Categories:
+                <span style="margin-right:8px;">🔌 Electronics</span>
+                <span style="margin-right:8px;">📱 Iphones</span>
+                <span style="margin-right:8px;">🎧 Phone Accessories</span>
+                <span style="margin-right:8px;">💻 Laptops & Computers</span>
+                <span style="margin-right:8px;">🎮 PlayStation & Xbox</span>
+                <span style="margin-right:8px;">🧸 Toys & Games</span>
+                <span style="margin-right:8px;">🚗 Automotive</span>
+                <span style="margin-right:8px;">🛠️ Services</span>
+            </div>
+            <div id="productsContainer" class="products-grid"></div>
+            <div id="emptyMessage" class="empty-message" style="display:none;">No products uploaded yet. Start by uploading your first item!</div>
+        </div>
+
+        <!-- About Section -->
+        <div id="about" class="section">
+            <div class="about-section">
+                <h2>About LUV MONI's Shop</h2>
+                <p><strong>Welcome to LUV MONI's Shop!</strong></p>
+                <p>Your trusted online marketplace in Ghana for buying and selling quality products. Whether you're looking for electronics, fashion, home goods, or services, LUV MONI's Shop is your go-to destination.</p>
+
+                <h3 style="margin-top: 20px; margin-bottom: 10px;">Why Choose Us?</h3>
+                <p>✓ Easy product uploads with image support<br>
+                ✓ Secure transactions in Ghana Cedis (GHS)<br>
+                ✓ Wide variety of product categories<br>
+                ✓ Direct seller-to-buyer communication<br>
+                ✓ Location-based product discovery<br>
+                ✓ Transparent pricing and honest listings</p>
+
+                <h3 style="margin-top: 20px; margin-bottom: 10px;">How It Works</h3>
+                <p><strong>For Sellers:</strong> Upload your products with images and details → Get contacted by interested buyers → Arrange payment & delivery<br><br>
+                <strong>For Buyers:</strong> Browse available products → Contact sellers directly → Negotiate & complete transactions</p>
+
+                <h3 style="margin-top: 20px; margin-bottom: 10px;">Contact Info</h3>
+                <p>📧 Email: info@luvmonishop.com<br>
+                📱 WhatsApp: +233 (0)24 031 9580<br>
+                <div class="car-drift-container">
+                    <svg class="car-drift" viewBox="0 0 100 50">
+                        <rect x="10" y="20" width="80" height="20" rx="8" fill="#2c5364"/>
+                        <rect x="25" y="10" width="50" height="15" rx="6" fill="#667eea"/>
+                        <circle cx="25" cy="40" r="8" fill="#222" stroke="#fff" stroke-width="2"/>
+                        <circle cx="75" cy="40" r="8" fill="#222" stroke="#fff" stroke-width="2"/>
+                        <ellipse cx="25" cy="44" rx="4" ry="2" fill="#fff" opacity="0.5"/>
+                        <ellipse cx="75" cy="44" rx="4" ry="2" fill="#fff" opacity="0.5"/>
+                        <rect x="60" y="15" width="15" height="5" rx="2" fill="#fff" opacity="0.7"/>
+                    </svg>
+                    <svg class="drift-smoke" viewBox="0 0 60 20">
+                        <ellipse cx="10" cy="10" rx="10" ry="6" fill="#cfd8dc" opacity="0.7"/>
+                        <ellipse cx="30" cy="10" rx="10" ry="6" fill="#cfd8dc" opacity="0.5"/>
+                        <ellipse cx="50" cy="10" rx="10" ry="6" fill="#cfd8dc" opacity="0.3"/>
+                    </svg>
+                </div>
+                📍 Ghana-wide Delivery Available
+                </p>
+
+                <p style="margin-top: 20px; color: #666; font-size: 14px;"><em>Happy selling and buying! - LUV MONI's Shop Team ❤️</em></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+                // Theme toggle logic
+                const themeToggle = document.getElementById('themeToggle');
+                const lampIcon = document.getElementById('lampIcon');
+                function setTheme(dark) {
+                    if (dark) {
+                        document.body.classList.add('dark-theme');
+                        lampIcon.textContent = '🔦';
+                        localStorage.setItem('theme', 'dark');
+                    } else {
+                        document.body.classList.remove('dark-theme');
+                        lampIcon.textContent = '💡';
+                        localStorage.setItem('theme', 'light');
+                    }
+                }
+                themeToggle?.addEventListener('click', function() {
+                    const isDark = document.body.classList.contains('dark-theme');
+                    setTheme(!isDark);
+                });
+                // On load, set theme from localStorage
+                window.addEventListener('DOMContentLoaded', function() {
+                    const savedTheme = localStorage.getItem('theme');
+                    setTheme(savedTheme === 'dark');
+                });
+        // Load products from localStorage
+        function loadProducts() {
+            const products = JSON.parse(localStorage.getItem('products')) || [];
+            displayProducts(products);
+        }
+
+        // Display products with filter and search
+        function displayProducts(products) {
+            const container = document.getElementById('productsContainer');
+            const emptyMsg = document.getElementById('emptyMessage');
+            const category = document.getElementById('categoryFilter')?.value || '';
+            const search = document.getElementById('searchBar')?.value?.toLowerCase() || '';
+
+            let filtered = products;
+            if (category) {
+                filtered = filtered.filter(p => p.category && p.category.toLowerCase() === category.toLowerCase());
+            }
+            if (search) {
+                filtered = filtered.filter(p =>
+                    (p.name && p.name.toLowerCase().includes(search)) ||
+                    (p.description && p.description.toLowerCase().includes(search))
+                );
+            }
+
+            if (filtered.length === 0) {
+                container.innerHTML = '';
+                emptyMsg.style.display = 'block';
+                return;
+            }
+
+            emptyMsg.style.display = 'none';
+            container.innerHTML = filtered.map((product, index) => {
+                // Map category to logo
+                const categoryLogos = {
+                    'Electronics': '🔌',
+                    'Iphones': '📱',
+                    'Phone Accessories': '🎧',
+                    'Laptops & Computers': '💻',
+                    'PlayStation & Xbox': '🎮',
+                    'Toys & Games': '🧸',
+                    'Automotive': '🚗',
+                    'Services': '🛠️'
+                };
+                const logo = categoryLogos[product.category] || '';
+                // Show all images as a carousel/row
+                let imagesHtml = '';
+                if (product.images && product.images.length > 0) {
+                    imagesHtml = `<div style="display:flex; gap:6px; overflow-x:auto; margin-bottom:8px;">` +
+                        product.images.map(img => `<img src="${img}" alt="${product.name}" style="width:80px; height:80px; object-fit:cover; border-radius:6px; border:1px solid #cfd8dc; box-shadow:0 1px 4px rgba(44,83,100,0.08);" />`).join('') +
+                        `</div>`;
+                } else if (product.image) {
+                    imagesHtml = `<img src="${product.image}" alt="${product.name}" class="product-image">`;
+                }
+                return `
+                <div class="product-card">
+                    ${imagesHtml}
+                    <div class="product-info">
+                        <div class="product-title">${product.name}</div>
+                        <div class="product-description">${product.description}</div>
+                        <div style="font-size: 12px; color: #999; margin-bottom: 8px;">
+                            <strong>Category:</strong> <span>${logo}</span> ${product.category} | <strong>Location:</strong> ${product.location}
+                        </div>
+                        <div class="product-price">GHS ${parseFloat(product.price).toFixed(2)}</div>
+                        <div class="product-actions">
+                            <button class="btn-contact" onclick="contactSeller('${product.name}')">💬 Contact Seller</button>
+                            <button class="btn-delete" onclick="deleteProduct(${index})">🗑️ Delete</button>
+                        </div>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        // Upload product
+        // Upload product with multiple images
+        function uploadProduct(event) {
+            event.preventDefault();
+
+            const fileInput = document.getElementById('productImage');
+            const files = fileInput.files;
+            if (!files || files.length === 0) {
+                alert('Please select at least one image');
+                return;
+            }
+
+            const images = [];
+            let loaded = 0;
+            for (let i = 0; i < files.length; i++) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    images[i] = e.target.result;
+                    loaded++;
+                    if (loaded === files.length) {
+                        const product = {
+                            name: document.getElementById('productName').value,
+                            price: document.getElementById('productPrice').value,
+                            description: document.getElementById('productDescription').value,
+                            category: document.getElementById('productCategory').value,
+                            location: document.getElementById('productLocation').value,
+                            images: images,
+                            uploadDate: new Date().toLocaleDateString()
+                        };
+                        let products = JSON.parse(localStorage.getItem('products')) || [];
+                        products.push(product);
+                        localStorage.setItem('products', JSON.stringify(products));
+                        // Reset form
+                        document.getElementById('uploadForm').reset();
+                        document.getElementById('preview').style.display = 'none';
+                        document.getElementById('preview').innerHTML = '';
+                        alert('✅ Product uploaded successfully!');
+                        displayProducts(products);
+                        showSection('shop');
+                    }
+                };
+                reader.readAsDataURL(files[i]);
+            }
+        }
+
+        // Delete product
+        function deleteProduct(index) {
+            if (confirm('Are you sure you want to delete this product?')) {
+                let products = JSON.parse(localStorage.getItem('products')) || [];
+                products.splice(index, 1);
+                localStorage.setItem('products', JSON.stringify(products));
+                displayProducts(products);
+                alert('Product deleted!');
+            }
+        }
+
+        // Contact seller
+        function contactSeller(productName) {
+            const message = `Hi, I'm interested in buying: ${productName}`;
+            alert(`Message to seller: "${message}"\n\nIn a real system, you would be redirected to a messaging platform or WhatsApp.`);
+        }
+
+        // Show/Hide sections
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        // Image preview
+        // Image preview for multiple images
+        document.getElementById('productImage')?.addEventListener('change', function(e) {
+            const preview = document.getElementById('preview');
+            const files = e.target.files;
+            preview.innerHTML = '';
+            if (files && files.length > 0) {
+                preview.style.display = 'flex';
+                for (let i = 0; i < files.length; i++) {
+                    const img = document.createElement('img');
+                    img.style.width = '100px';
+                    img.style.height = '100px';
+                    img.style.objectFit = 'cover';
+                    img.style.borderRadius = '8px';
+                    img.style.marginRight = '8px';
+                    img.style.marginBottom = '8px';
+                    img.style.boxShadow = '0 2px 8px rgba(44,83,100,0.10)';
+                    img.style.border = '1.5px solid #cfd8dc';
+                    img.alt = 'Preview';
+                    preview.appendChild(img);
+                    const reader = new FileReader();
+                    reader.onload = function(ev) {
+                        img.src = ev.target.result;
+                    };
+                    reader.readAsDataURL(files[i]);
+                }
+            } else {
+                preview.style.display = 'none';
+            }
+        });
+
+        // Load products on page load
+        window.addEventListener('load', loadProducts);
+
+        // Add event listeners for filter and search
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryFilter = document.getElementById('categoryFilter');
+            const searchBar = document.getElementById('searchBar');
+            if (categoryFilter) {
+                categoryFilter.addEventListener('change', function() {
+                    const products = JSON.parse(localStorage.getItem('products')) || [];
+                    displayProducts(products);
+                });
+            }
+            if (searchBar) {
+                searchBar.addEventListener('input', function() {
+                    const products = JSON.parse(localStorage.getItem('products')) || [];
+                    displayProducts(products);
+                });
+            }
+        });
+    </script>
+</div>
+    <footer style="text-align:center; margin: 40px 0 20px 0; color: #999; font-size: 15px;">
+        <a href="google66a85e4c96154f1b.html" target="_blank" style="color:#667eea; text-decoration:underline;">Verify Google Search Console</a>
+    </footer>
+</body>
+</html>
